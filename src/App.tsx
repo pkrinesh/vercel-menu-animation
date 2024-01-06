@@ -1,8 +1,11 @@
 import useWindowScroll from '@react-hook/window-scroll'
-import reactLogo from './assets/react.svg'
+import { AnimatePresence, motion } from 'framer-motion'
+import React from 'react'
 
+import reactLogo from './assets/react.svg'
 import { useRange } from './hooks/use-range'
 import viteLogo from '/vite.svg'
+import clsx from 'clsx'
 
 function App() {
 	const y = useWindowScroll(60)
@@ -68,9 +71,20 @@ function App() {
 
 export default App
 
+const tabs = [
+	{ id: 'project', label: 'Project' },
+	{ id: 'deployments', label: 'Deployments' },
+	{ id: 'analytics', label: 'Analytics' },
+	{ id: 'logs', label: 'Logs' },
+	{ id: 'settings', label: 'Settings' },
+]
+
 function NavBar() {
 	const y = useWindowScroll(60)
 	const navbarTranslateX = useRange(y, 0, 50, 0, 42)
+
+	const [active, setActive] = React.useState(tabs[0].id)
+	const [hover, setHover] = React.useState<string | null>(null)
 
 	return (
 		<nav className="sticky top-0 flex border-b border-zinc-700 bg-zinc-900 text-sm">
@@ -78,15 +92,61 @@ function NavBar() {
 				style={{
 					transform: `translateX(${navbarTranslateX}px)`,
 				}}
-				className="relative flex gap-4 px-6 py-4 text-zinc-400"
+				className="relative flex gap-1 px-3 py-4 text-zinc-400"
+				onPointerLeave={() => {
+					setHover(null)
+				}}
 			>
-				<li className="text-zinc-200">Project</li>
-				<li>Deployments</li>
-				<li>Analytics</li>
-				<li>Speed Insights</li>
-				<li>Logs</li>
-				<li>Storage</li>
-				<li>Settings</li>
+				{tabs.map((tab) => {
+					return (
+						<li key={tab.id} className="cursor-pointer">
+							<a
+								className={clsx(
+									'relative rounded-full px-3 py-1.5 text-sm font-medium outline-sky-400 transition focus-visible:outline-2'
+								)}
+								onClick={(e) => {
+									e.preventDefault()
+									setActive(tab.id)
+								}}
+								onPointerEnter={() => {
+									setHover(tab.id)
+								}}
+								onFocus={() => {
+									setHover(tab.id)
+								}}
+							>
+								{tab.label}
+								{/* {active === tab.id && (
+									<motion.span
+										layoutId="bubble"
+										className="absolute inset-0 z-10 bg-white mix-blend-difference"
+										style={{ borderRadius: 9999 }}
+										transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+									/>
+								)} */}
+								<AnimatePresence>
+									{hover === tab.id ? (
+										<motion.span
+											className="absolute inset-0 z-10 bg-white/5 mix-blend-difference"
+											style={{ borderRadius: 9999 }}
+											transition={{ type: 'tween', ease: 'easeOut', duration: 0.15 }}
+											initial={{
+												opacity: hover === null ? 0 : 1,
+											}}
+											animate={{
+												opacity: 1,
+											}}
+											exit={{
+												opacity: 0,
+											}}
+											layoutId="hover-bubble"
+										/>
+									) : null}
+								</AnimatePresence>
+							</a>
+						</li>
+					)
+				})}
 			</ol>
 		</nav>
 	)
