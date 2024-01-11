@@ -84,7 +84,7 @@ const tabs = [
 	{ id: 'deployments', label: 'Deployments' },
 	{ id: 'analytics', label: 'Analytics' },
 	{ id: 'logs', label: 'Logs' },
-	{ id: 'settings', label: 'Settings' },
+	// { id: 'settings', label: 'Settings' },
 ]
 
 function NavBar() {
