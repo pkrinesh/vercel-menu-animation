@@ -20,40 +20,40 @@ export function useRange(
 	return mappedValue
 }
 
-type RockPaperScissors = '👊🏻' | '🖐🏾' | '✌🏽'
+// type RockPaperScissors = '👊🏻' | '🖐🏾' | '✌🏽'
 
-type TrueTable = {
-	'👊🏻': '✌🏽'
-	'🖐🏾': '👊🏻'
-	'✌🏽': '🖐🏾'
-}
+// type TrueTable = {
+// 	'👊🏻': '✌🏽'
+// 	'🖐🏾': '👊🏻'
+// 	'✌🏽': '🖐🏾'
+// }
 
-type WhoWins<
-	O extends RockPaperScissors,
-	P extends RockPaperScissors,
-> = P extends O ? 'draw' : O extends TrueTable[P] ? 'win' : 'lose'
+// type WhoWins<
+// 	O extends RockPaperScissors,
+// 	P extends RockPaperScissors,
+// > = P extends O ? 'draw' : O extends TrueTable[P] ? 'win' : 'lose'
 
-const TrueTable = {
-	'👊🏻': '✌🏽',
-	'🖐🏾': '👊🏻',
-	'✌🏽': '🖐🏾',
-}
+// const TrueTable = {
+// 	'👊🏻': '✌🏽',
+// 	'🖐🏾': '👊🏻',
+// 	'✌🏽': '🖐🏾',
+// }
 
-type Result = 'draw' | 'win' | 'lose'
+// type Result = 'draw' | 'win' | 'lose'
 
-function whoWins<O extends RockPaperScissors, P extends RockPaperScissors>(
-	o: O,
-	p: P
-) {
-	if ((o as RockPaperScissors) === (p as RockPaperScissors)) {
-		return 'draw' as WhoWins<O, P>
-	}
+// function whoWins<O extends RockPaperScissors, P extends RockPaperScissors>(
+// 	o: O,
+// 	p: P
+// ) {
+// 	if ((o as RockPaperScissors) === (p as RockPaperScissors)) {
+// 		return 'draw' as WhoWins<O, P>
+// 	}
 
-	if (TrueTable[p] === o) {
-		return 'win' as WhoWins<O, P>
-	} else {
-		return 'lose' as WhoWins<O, P>
-	}
-}
+// 	if (TrueTable[p] === o) {
+// 		return 'win' as WhoWins<O, P>
+// 	} else {
+// 		return 'lose' as WhoWins<O, P>
+// 	}
+// }
 
-whoWins('✌🏽', '👊🏻')
+// whoWins('✌🏽', '👊🏻')
