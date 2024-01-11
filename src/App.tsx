@@ -12,7 +12,7 @@ function App() {
 	const logoScale = useRange(y, [0, 50], [1, 0.8])
 
 	return (
-		<motion.div className="font-sans">
+		<div className="font-sans">
 			<header className="ml-12 flex gap-4 bg-black px-6 py-4 text-sm">
 				<svg
 					style={{
@@ -62,7 +62,7 @@ function App() {
 
 			<NavBar />
 
-			<main className="mx-auto my-12 max-w-5xl rounded-md border border-zinc-800">
+			<main className="mx-auto my-12 max-w-5xl overflow-hidden rounded-md border border-zinc-800">
 				<table className="w-full">
 					<tbody>
 						{[...Array(20)].map((_, i) => (
@@ -73,7 +73,7 @@ function App() {
 					</tbody>
 				</table>
 			</main>
-		</motion.div>
+		</div>
 	)
 }
 
@@ -100,7 +100,7 @@ function NavBar() {
 				style={{
 					transform: `translateX(${navbarTranslateX}px)`,
 				}}
-				className="relative flex gap-1 px-3 py-4 text-zinc-400"
+				className="relative flex gap-1 px-1 py-4 text-zinc-400 lg:px-3"
 				onPointerLeave={() => {
 					setHover(null)
 				}}
@@ -129,7 +129,7 @@ function NavBar() {
 								{active === tab.id && (
 									<motion.span
 										layoutId="bubble"
-										className="absolute -bottom-[9px] left-0 right-0 z-10 mx-2 h-[2px] 
+										className="absolute -bottom-[9px] left-0 right-0 z-10 mx-2 h-[2px]
 																rounded bg-white/80 mix-blend-difference
 															"
 										transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
