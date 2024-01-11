@@ -9,10 +9,10 @@ import clsx from 'clsx'
 
 function App() {
 	const y = useWindowScroll(60)
-	const logoScale = useRange(y, 0, 50, 1, 0.8)
+	const logoScale = useRange(y, [0, 50], [1, 0.8])
 
 	return (
-		<div className="font-sans">
+		<motion.div className="font-sans">
 			<header className="flex gap-4 bg-black px-6 py-4 ml-12 text-sm">
 				<svg
 					style={{
@@ -31,7 +31,11 @@ function App() {
 						/
 					</li>
 					<li className="flex items-center gap-2">
-						<a href="https://vitejs.dev" target="_blank" className="flex items-center gap-2">
+						<a
+							href="https://vitejs.dev"
+							target="_blank"
+							className="flex items-center gap-2"
+						>
 							<span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 bg-black p-1">
 								<img src={viteLogo} className="h-5 w-5" alt="Vite logo" />
 							</span>
@@ -42,7 +46,11 @@ function App() {
 						/
 					</li>
 					<li className="flex items-center gap-2">
-						<a href="https://react.dev" target="_blank" className="flex items-center gap-2">
+						<a
+							href="https://react.dev"
+							target="_blank"
+							className="flex items-center gap-2"
+						>
 							<span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-zinc-700 bg-black p-1">
 								<img src={reactLogo} className="h-5 w-5" alt="React logo" />
 							</span>
@@ -65,7 +73,7 @@ function App() {
 					</tbody>
 				</table>
 			</main>
-		</div>
+		</motion.div>
 	)
 }
 
@@ -81,7 +89,7 @@ const tabs = [
 
 function NavBar() {
 	const y = useWindowScroll(60)
-	const navbarTranslateX = useRange(y, 0, 50, 0, 42)
+	const navbarTranslateX = useRange(y, [0, 50], [0, 42])
 
 	const [active, setActive] = React.useState(tabs[0].id)
 	const [hover, setHover] = React.useState<string | null>(null)
@@ -99,10 +107,11 @@ function NavBar() {
 			>
 				{tabs.map((tab) => {
 					return (
-						<li key={tab.id} className="cursor-pointer">
-							<a
+						<motion.li key={tab.id} className="cursor-pointer">
+							<motion.a
+								layout
 								className={clsx(
-									'relative rounded-full px-3 py-1.5 text-sm font-medium outline-sky-400 transition focus-visible:outline-2'
+									'relative rounded px-3 py-2.5 text-sm font-medium outline-sky-400 focus-visible:outline-2'
 								)}
 								onClick={(e) => {
 									e.preventDefault()
@@ -116,20 +125,23 @@ function NavBar() {
 								}}
 							>
 								{tab.label}
-								{/* {active === tab.id && (
+								{active === tab.id && (
 									<motion.span
 										layoutId="bubble"
-										className="absolute inset-0 z-10 bg-white mix-blend-difference"
-										style={{ borderRadius: 9999 }}
+										className="absolute -bottom-[9px] right-0 left-0 h-[2px] rounded mx-2 z-10 bg-white/80 mix-blend-difference"
 										transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
 									/>
-								)} */}
+								)}
 								<AnimatePresence>
 									{hover === tab.id ? (
 										<motion.span
-											className="absolute inset-0 z-10 bg-white/5 mix-blend-difference"
-											style={{ borderRadius: 9999 }}
-											transition={{ type: 'tween', ease: 'easeOut', duration: 0.15 }}
+											className="absolute inset-0 rounded z-10 bg-white/5 mix-blend-difference"
+											// style={{ borderRadius: '0.25rem' }}
+											transition={{
+												type: 'tween',
+												ease: 'easeOut',
+												duration: 0.15,
+											}}
 											initial={{
 												opacity: hover === null ? 0 : 1,
 											}}
@@ -143,8 +155,8 @@ function NavBar() {
 										/>
 									) : null}
 								</AnimatePresence>
-							</a>
-						</li>
+							</motion.a>
+						</motion.li>
 					)
 				})}
 			</ol>
