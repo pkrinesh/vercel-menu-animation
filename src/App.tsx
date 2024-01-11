@@ -13,7 +13,7 @@ function App() {
 
 	return (
 		<motion.div className="font-sans">
-			<header className="flex gap-4 bg-black px-6 py-4 ml-12 text-sm">
+			<header className="ml-12 flex gap-4 bg-black px-6 py-4 text-sm">
 				<svg
 					style={{
 						transform: `scale(${logoScale})`,
@@ -111,7 +111,8 @@ function NavBar() {
 							<motion.a
 								layout
 								className={clsx(
-									'relative rounded px-3 py-2.5 text-sm font-medium outline-sky-400 focus-visible:outline-2'
+									'relative rounded px-3 py-2.5 text-sm font-medium',
+									'outline-sky-400 focus-visible:outline-2'
 								)}
 								onClick={(e) => {
 									e.preventDefault()
@@ -128,15 +129,16 @@ function NavBar() {
 								{active === tab.id && (
 									<motion.span
 										layoutId="bubble"
-										className="absolute -bottom-[9px] right-0 left-0 h-[2px] rounded mx-2 z-10 bg-white/80 mix-blend-difference"
+										className="absolute -bottom-[9px] left-0 right-0 z-10 mx-2 h-[2px] 
+																rounded bg-white/80 mix-blend-difference
+															"
 										transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
 									/>
 								)}
 								<AnimatePresence>
 									{hover === tab.id ? (
 										<motion.span
-											className="absolute inset-0 rounded z-10 bg-white/5 mix-blend-difference"
-											// style={{ borderRadius: '0.25rem' }}
+											className="absolute inset-0 z-10 rounded bg-white/5 mix-blend-difference"
 											transition={{
 												type: 'tween',
 												ease: 'easeOut',
